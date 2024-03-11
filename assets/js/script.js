@@ -19,6 +19,8 @@ $(function () {
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
+
+  // Make it easy to loop through the date sections
   var timeBlocks = [
     "hour-9",
     "hour-10",
@@ -31,26 +33,23 @@ $(function () {
     "hour-17"
   ];
 
+  // Helper method to quickly initialize/clear localStorage plans
   function ClearAllPlans() {
     for (var i=0; i<timeBlocks.length; i++) {
       localStorage.setItem(timeBlocks[i], "");
     }
   }
-
-  //var utc = require("dayjs/plugin/utc");
   
-  var today = dayjs()
-  console.log("TODAY IS: " + today.toString())
-  $("#currentDay")[0].textContent = "TODAY: " + today.toString();
-  //var today2 = today.add(1, "day").set("hour", 12).set("minute", 30).tz("");
-  //console.log("TODAY2 IS: " + today2.toString())
+  var today = dayjs(); //.add(12, "hour");
 
   var previousDate = localStorage.getItem("date-last-used");
   if (previousDate == null) {
+    //console.log("no previous date!!")
     localStorage.setItem("date-last-used", today.format("M-D-YYYY"));
     ClearAllPlans();
   }
-  if (today.isAfter(dayjs(previousDate))) {
+  if (!today.isSame(dayjs(previousDate), "day")) {
+    //console.log("today is after last date!");
     for(var i=0; i<timeBlocks.length; i++) {
       $("#" + timeBlocks[i]).children("textarea.description").val("");
     }
@@ -60,13 +59,13 @@ $(function () {
 
   var militaryHour = parseInt(today.format("H")); // Used for actual time checking, no AM/PM
   var pastPresentFutureState = "";
-  console.log("military hour is: " + militaryHour);
+  //console.log("military hour is: " + militaryHour);
   var timeBlockContainer = this.querySelector(".container-fluid").children;
-  console.log(timeBlockContainer)
+  //console.log(timeBlockContainer)
   for (var i = 0; i < timeBlockContainer.length; i++) {
     var timeBlock = timeBlockContainer[i];
     var id = parseInt(timeBlock.id.split("-")[1]);
-    console.log("id: " + id + "; militaryHour: " + militaryHour);
+    //console.log("id: " + id + "; militaryHour: " + militaryHour);
     if (id < militaryHour) {
       timeBlock.classList.add("past");
       pastPresentFutureState = "past";
@@ -79,32 +78,20 @@ $(function () {
       timeBlock.classList.add("present");
       pastPresentFutureState = "present";
     }
-    console.log("Time block " + id + " is in the " + pastPresentFutureState + "!");
+    //console.log("Time block " + id + " is in the " + pastPresentFutureState + "!");
   }
 
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
-  h9Text = localStorage.getItem("hour-9");
-  h10Text = localStorage.getItem("hour-10");
-  h11Text = localStorage.getItem("hour-11");
-  h12Text = localStorage.getItem("hour-12");
-  h1Text = localStorage.getItem("hour-1");
-  h2Text = localStorage.getItem("hour-2");
-  h3Text = localStorage.getItem("hour-3");
-  h4Text = localStorage.getItem("hour-4");
-  h5Text = localStorage.getItem("hour-5");
-  $("#hour-9").children("textarea.description").val(h9Text);
-  $("#hour-10").children("textarea.description").val(h10Text);
-  $("#hour-11").children("textarea.description").val(h11Text);
-  $("#hour-12").children("textarea.description").val(h12Text);
-  $("#hour-1").children("textarea.description").val(h1Text);
-  $("#hour-2").children("textarea.description").val(h2Text);
-  $("#hour-3").children("textarea.description").val(h3Text);
-  $("#hour-4").children("textarea.description").val(h4Text);
-  $("#hour-5").children("textarea.description").val(h5Text);
-
+  for (var i=0; i<timeBlocks.length; i++) {
+    timeToSave = timeBlocks[i];
+    newText = localStorage.getItem(timeToSave);
+    //console.log("saving '" + newText + "' to '" + timeToSave + "'");
+    $("#" + timeToSave).children("textarea.description").val(newText);
+  }
   //
   // TODO: Add code to display the current date in the header of the page.
+  $("#currentDay")[0].textContent = "TODAY: " + today.format("MMMM D, YYYY");
 });
