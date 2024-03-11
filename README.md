@@ -1,16 +1,12 @@
-# Work Day Scheduler Starter Code
+# Work Day Scheduler
 
 ## Description
-??????????
+Saves your plans for today's work! Clears itself when loaded on a different day! Uses starter code from module 5 challenge.
 
 ## The Result
-[Click here!](DEPLOYED_URL_HERE)
+[Click here!](https://alfwall.github.io/day-scheduler/)
 
 ![Screenshot of the deployed project.](SCREENSHOT_OF_PROJECT_IN_ASSETS)
-
-## Credits
-- [Description of whose code you've taken](URL_TO_THEIR_WEBSITE_AND_OR_CODE)
-
 
 ## TODO
 - [x] Get the current day, $("#currentDay").text(today.format("dddd, MMM D, YYYY"))
