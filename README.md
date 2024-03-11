@@ -6,7 +6,7 @@ Saves your plans for today's work! Clears itself when loaded on a different day!
 ## The Result
 [Click here!](https://alfwall.github.io/day-scheduler/)
 
-![Screenshot of the deployed project.](SCREENSHOT_OF_PROJECT_IN_ASSETS)
+![Screenshot of the deployed project.](./assets/images/screenshot.png)
 
 ## TODO
 - [x] Get the current day, $("#currentDay").text(today.format("dddd, MMM D, YYYY"))
