@@ -13,13 +13,13 @@
 
 
 ## TODO
-- [ ] Get the current day, $("#currentDay").text(today.format("dddd, MMM D, YYYY"))
-- [ ] Get the current time, apply past/present/future classes to each hour based on current hour.
-- [ ] LOCAL STORAGE: Store the date whenever saving. If the date has changed, delete everything.
-- [ ] On load, check localStorage.SavedDate. If null, save today there and create a fresh schedule.
-- [ ] If new day, erase all plans.
-- [ ] If same day, recreate that schedule.
-- [ ] Check the time, get the hour. Style that hour as "Current", everything before as "Past", and after as "Future".
+- [x] Get the current day, $("#currentDay").text(today.format("dddd, MMM D, YYYY"))
+- [x] Get the current time, apply past/present/future classes to each hour based on current hour.
+- [x] LOCAL STORAGE: Store the date whenever saving. If the date has changed, delete everything.
+- [x] On load, check localStorage.SavedDate. If null, save today there and create a fresh schedule.
+- [x] If new day, erase all plans.
+- [x] If same day, recreate that schedule.
+- [x] Check the time, get the hour. Style that hour as "Current", everything before as "Past", and after as "Future".
 
 
 ## User Story
